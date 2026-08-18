@@ -92,3 +92,7 @@ campus-life-super-app/
 ├── images/
 └── README.md
 ```
+
+## Testing Notes
+
+This project was tested locally and on the deployed GitHub Pages site across desktop and mobile viewport widths using Chrome DevTools device emulation. Keyboard navigation (Tab + Enter) was verified on the Dining & Map page's location list.
