@@ -4,7 +4,32 @@
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     background-color: #f7f8fa;
-    color: #222;
+    color: #222; /* Dark text on light background for strong contrast (WCAG AA+) */
+}
+
+/* Skip link: hidden until focused, lets keyboard users bypass the nav bar */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #1a1a33;
+    color: white;
+    padding: 8px 16px;
+    z-index: 1000;
+    transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Visible focus outline on every interactive element, for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+.list-group-item:focus {
+    outline: 3px solid #ffcc66;
+    outline-offset: 2px;
 }
 
 .hero {
@@ -15,13 +40,17 @@ body {
 }
 
 .hero .lead {
-    color: #cfcfe0;
+    color: #d9d9ec; /* Lightened for sufficient contrast against the dark navy background */
+}
+
+.hero-image {
+    max-height: 350px;
+    width: 100%;
+    object-fit: cover;
 }
 
 /* ==========================================================
    FEATURE CARDS - Flexbox layout
-   Cards sit side by side on desktop, and stack vertically
-   on small screens via the media query below.
    ========================================================== */
 .feature-cards {
     display: flex;
@@ -40,7 +69,7 @@ body {
 }
 
 /* ==========================================================
-   EVENT CARDS (events.html) - rendered dynamically by JS
+   EVENT CARDS (events.html)
    ========================================================== */
 .event-card {
     background-color: white;
@@ -52,6 +81,12 @@ body {
 
 .event-card h3 {
     font-size: 1.1rem;
+}
+
+/* Utility class used by JS instead of inline styles, so elements can be
+   hidden/shown without ever touching element.style directly */
+.hidden {
+    display: none !important;
 }
 
 /* ==========================================================
@@ -73,7 +108,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #666;
+    color: #444; /* Darkened from the original gray for better contrast on the light gray background */
 }
 
 .location-list {
@@ -90,10 +125,23 @@ body {
 }
 
 /* ==========================================================
-   MEDIA QUERY - responsive breakpoint at 600px
-   Stacks the Flexbox layouts and shrinks spacing/text
-   so the app stays usable on phones.
+   RESPONSIVE MEDIA QUERIES
+   Two breakpoints: tablet (900px) and mobile (600px), so the
+   layout adapts smoothly across desktop, tablet, and phone.
    ========================================================== */
+
+/* Tablet: tighten spacing, slightly reduce heading size */
+@media (max-width: 900px) {
+    .feature-cards {
+        gap: 14px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile: stack Flexbox layouts vertically, shrink further */
 @media (max-width: 600px) {
     .feature-cards,
     .map-layout {
@@ -106,5 +154,9 @@ body {
 
     .hero h1 {
         font-size: 1.6rem;
+    }
+
+    .hero-image {
+        max-height: 220px;
     }
 }
